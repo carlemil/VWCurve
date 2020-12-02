@@ -68,7 +68,7 @@ class LineTest {
             LinePoint(0.17242733556095713, 0.845440037453175, 0.003921568393707275),
         )
 
-        val (bufferedImage, g2) = setupGraphics(600.0, 20.0)
+        val (bufferedImage, g2) = setupGraphics(640.0, 20.0)
 
         VariableWidthLine.drawLine(line, g2, 600.0)
 

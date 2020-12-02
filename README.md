@@ -1,6 +1,6 @@
 # VWLine
 
 A kotlin lib for drawing long splines with varying width.
-![N|Solid](https://github.com/carlemil/VWLine/blob/main/readme-img/che.png?raw=true)
+![N|Solid](https://github.com/carlemil/VWLine/blob/main/LineTestOutput.png?raw=true)
 
-Example of how to use this might show up in the future.
+The above image was drawn using this library running the LineTest.kt test class and hopefully illustrates what this lib does in a simple way.

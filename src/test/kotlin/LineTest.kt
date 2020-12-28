@@ -64,9 +64,13 @@ class LineTest {
 
         val (bufferedImage, g2) = setupGraphics(640.0, 20.0)
 
-        val rectangle = Rectangle(0,0,600,600)
+        val r = Rectangle(0,0,600,600)
+        line.forEach { point ->
+            point.x = r.getX() + point.x.times(r.height)
+            point.y = r.getY() + point.y.times(r.width)
+        }
 
-        g2.drawVariableWidthCurve(line, rectangle, minWidth = 2.0, maxWidth = 60.0)
+        g2.drawVariableWidthCurve(line, minWidth = 2.0, maxWidth = 60.0)
 
         writeImageToPngFile(bufferedImage, "LineTestOutput.png")
 

@@ -25,7 +25,7 @@ test {
 publishing {
     publications {
         mavenJava(MavenPublication) {
-            artifactId = 'vwline-lib'
+            artifactId = 'vwcurve'
             from components.java
         }
     }

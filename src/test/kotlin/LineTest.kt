@@ -1,6 +1,6 @@
 import org.junit.jupiter.api.Test
 import se.kjellstrand.variablewidthline.LinePoint
-import se.kjellstrand.variablewidthline.VariableWidthLine
+import se.kjellstrand.variablewidthline.drawVariableWidthCurve
 import java.awt.*
 import java.awt.image.BufferedImage
 import java.io.File
@@ -64,7 +64,9 @@ class LineTest {
 
         val (bufferedImage, g2) = setupGraphics(640.0, 20.0)
 
-        VariableWidthLine.drawLine(line, g2, 600.0, minWidth = 2.0, maxWidth = 60.0)
+        val rectangle = Rectangle(0,0,600,600)
+
+        g2.drawVariableWidthCurve(line, rectangle, minWidth = 2.0, maxWidth = 60.0)
 
         writeImageToPngFile(bufferedImage, "LineTestOutput.png")
 

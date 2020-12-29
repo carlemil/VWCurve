@@ -1,4 +1,4 @@
-# VWLine
+# VWCurve
 
 A kotlin lib for drawing long splines with varying width.
 ![N|Solid](https://github.com/carlemil/VWCurve/blob/main/LineTestOutput.png?raw=true)

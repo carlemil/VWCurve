@@ -5,13 +5,11 @@ import java.awt.Graphics2D
 import java.awt.geom.GeneralPath
 import kotlin.math.*
 
-fun Graphics2D.drawVariableWidthCurve(    line: List<LinePoint>) {
+fun Graphics2D.drawVariableWidthCurve(line: List<LinePoint>) {
     drawPolygon(buildHullFromPolygon(line), this)
 }
 
-// Add a extension for the android canvas somehow.
-
-private fun buildHullFromPolygon(    ppList: List<LinePoint>): MutableList<LinePoint> {
+private fun buildHullFromPolygon(ppList: List<LinePoint>): MutableList<LinePoint> {
     val leftHull = mutableListOf<LinePoint>()
     val rightHull = mutableListOf<LinePoint>()
 
@@ -24,8 +22,8 @@ private fun buildHullFromPolygon(    ppList: List<LinePoint>): MutableList<LineP
         val alfaPlus90 = calculateAlfa(a, c, b, (PI / 2.0))
         val alfaMinus90 = calculateAlfa(a, c, b, -(PI / 2.0))
 
-        leftHull.add(calculatePerpendicularPolyPoint(p0, p1,  alfaPlus90))
-        rightHull.add(calculatePerpendicularPolyPoint(p0, p1,  alfaMinus90))
+        leftHull.add(calculatePerpendicularPolyPoint(p0, p1, alfaPlus90))
+        rightHull.add(calculatePerpendicularPolyPoint(p0, p1, alfaMinus90))
     }
 
     val hull = mutableListOf<LinePoint>()

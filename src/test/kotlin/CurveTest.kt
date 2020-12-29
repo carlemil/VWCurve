@@ -62,21 +62,25 @@ class CurveTest {
             LinePoint(0.1724273355609571, 0.845440037453175, 0.003921568393707275),
         )
 
-        val (bufferedImage, g2) = setupGraphics(640)
-
         val r = Rectangle(20, 20, 600, 600)
         val minWidth = 2.0
         val maxWidth = 60.0
         line.forEach { point ->
-            point.x = r.getX() + point.x.times(r.width )
-            point.y = r.getY() + point.y.times(r.height )
+            point.x = r.getX() + point.x.times(r.width)
+            point.y = r.getY() + point.y.times(r.height)
             point.w = point.w * (maxWidth - minWidth) / 2.0 + minWidth / 2.0
         }
 
+        val (bufferedImage, g2) = setupGraphics(640)
+
         g2.drawVariableWidthCurve(line)
 
-        writeImageToPngFile(bufferedImage, "LineTestOutput.png")
+        tearDownGraphics(g2)
 
+        writeImageToPngFile(bufferedImage, "LineTestOutput.png")
+    }
+
+    private fun tearDownGraphics(g2: Graphics2D) {
         g2.dispose()
     }
 

@@ -5,21 +5,13 @@ import java.awt.Graphics2D
 import java.awt.geom.GeneralPath
 import kotlin.math.*
 
-fun Graphics2D.drawVariableWidthCurve(
-    line: List<LinePoint>,
-    minWidth: Double,
-    maxWidth: Double
-) {
-    drawPolygon(buildHullFromPolygon(line, minWidth, maxWidth), this)
+fun Graphics2D.drawVariableWidthCurve(    line: List<LinePoint>) {
+    drawPolygon(buildHullFromPolygon(line), this)
 }
 
 // Add a extension for the android canvas somehow.
 
-private fun buildHullFromPolygon(
-    ppList: List<LinePoint>,
-    minWidth: Double,
-    maxWidth: Double
-): MutableList<LinePoint> {
+private fun buildHullFromPolygon(    ppList: List<LinePoint>): MutableList<LinePoint> {
     val leftHull = mutableListOf<LinePoint>()
     val rightHull = mutableListOf<LinePoint>()
 
@@ -32,8 +24,8 @@ private fun buildHullFromPolygon(
         val alfaPlus90 = calculateAlfa(a, c, b, (PI / 2.0))
         val alfaMinus90 = calculateAlfa(a, c, b, -(PI / 2.0))
 
-        leftHull.add(calculatePerpendicularPolyPoint(p0, p1, minWidth, maxWidth, alfaPlus90))
-        rightHull.add(calculatePerpendicularPolyPoint(p0, p1, minWidth, maxWidth, alfaMinus90))
+        leftHull.add(calculatePerpendicularPolyPoint(p0, p1,  alfaPlus90))
+        rightHull.add(calculatePerpendicularPolyPoint(p0, p1,  alfaMinus90))
     }
 
     val hull = mutableListOf<LinePoint>()
@@ -63,11 +55,9 @@ private fun drawPolygon(hull: MutableList<LinePoint>, g2: Graphics2D) {
 private fun calculatePerpendicularPolyPoint(
     p0: LinePoint,
     p1: LinePoint,
-    minWidth: Double,
-    maxWidth: Double,
     alfaPlus90: Double
 ): LinePoint {
-    val width = ((p0.w + p1.w) / 2.0) * (maxWidth - minWidth) / 2.0 + minWidth / 2.0
+    val width = ((p0.w + p1.w) / 2.0)
     val x = (p0.x + p1.x) / 2.0 + width * sin(alfaPlus90)
     val y = (p0.y + p1.y) / 2.0 + width * cos(alfaPlus90)
     return LinePoint(x, y)

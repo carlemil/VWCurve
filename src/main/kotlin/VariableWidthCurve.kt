@@ -5,11 +5,7 @@ import java.awt.Graphics2D
 import java.awt.geom.GeneralPath
 import kotlin.math.*
 
-fun Graphics2D.drawVariableWidthCurve(line: List<LinePoint>) {
-    drawPolygon(buildHullFromPolygon(line), this)
-}
-
-private fun buildHullFromPolygon(ppList: List<LinePoint>): MutableList<LinePoint> {
+fun buildHullFromPolygon(ppList: List<LinePoint>): MutableList<LinePoint> {
     val leftHull = mutableListOf<LinePoint>()
     val rightHull = mutableListOf<LinePoint>()
 
@@ -30,24 +26,6 @@ private fun buildHullFromPolygon(ppList: List<LinePoint>): MutableList<LinePoint
     hull.addAll(leftHull)
     hull.addAll(rightHull.reversed())
     return hull
-}
-
-private fun drawPolygon(hull: MutableList<LinePoint>, g2: Graphics2D) {
-    val path = GeneralPath()
-    val polygonInitialPP = LinePoint.getMidPoint(hull[hull.size - 1], hull[hull.size - 2])
-    path.moveTo(polygonInitialPP.x, polygonInitialPP.y)
-
-    for (i in 0 until hull.size) {
-        val quadStartPP = hull[(if (i == 0) hull.size else i) - 1]
-        val nextQuadStartPP = hull[i]
-        val quadEndPP = LinePoint.getMidPoint(quadStartPP, nextQuadStartPP)
-        path.quadTo(quadStartPP.x, quadStartPP.y, quadEndPP.x, quadEndPP.y)
-    }
-    path.closePath()
-
-    g2.paint = Color.BLACK
-
-    g2.fill(path)
 }
 
 private fun calculatePerpendicularPolyPoint(

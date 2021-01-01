@@ -1,7 +1,7 @@
 import org.junit.jupiter.api.Test
 import se.kjellstrand.variablewidthline.LinePoint
-import se.kjellstrand.variablewidthline.drawVariableWidthCurve
 import java.awt.*
+import java.awt.geom.GeneralPath
 import java.awt.image.BufferedImage
 import java.io.File
 import javax.imageio.ImageIO
@@ -10,7 +10,7 @@ class CurveTest {
     @Test
     internal fun drawAVWCurve() {
 
-        val line = listOf(
+        val line = mutableListOf(
             LinePoint(0.1810875895988005, 0.8504400374531756, 0.4921568393707275),
             LinePoint(0.2070683517123337, 0.8354400374531754, 0.2568393707275),
             LinePoint(0.2503696219015556, 0.8104400374531755, 0.0784313678741455),
@@ -73,11 +73,29 @@ class CurveTest {
 
         val (bufferedImage, g2) = setupGraphics(640)
 
-        g2.drawVariableWidthCurve(line)
+        drawPolygon(line, g2)
 
         tearDownGraphics(g2)
 
         writeImageToPngFile(bufferedImage, "LineTestOutput.png")
+    }
+
+    private fun drawPolygon(hull: MutableList<LinePoint>, g2: Graphics2D) {
+        val path = GeneralPath()
+        val polygonInitialPP = LinePoint.getMidPoint(hull[hull.size - 1], hull[hull.size - 2])
+        path.moveTo(polygonInitialPP.x, polygonInitialPP.y)
+
+        for (i in 0 until hull.size) {
+            val quadStartPP = hull[(if (i == 0) hull.size else i) - 1]
+            val nextQuadStartPP = hull[i]
+            val quadEndPP = LinePoint.getMidPoint(quadStartPP, nextQuadStartPP)
+            path.quadTo(quadStartPP.x, quadStartPP.y, quadEndPP.x, quadEndPP.y)
+        }
+        path.closePath()
+
+        g2.paint = Color.BLACK
+
+        g2.fill(path)
     }
 
     private fun tearDownGraphics(g2: Graphics2D) {

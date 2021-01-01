@@ -5,7 +5,7 @@ A kotlin lib for drawing long splines with varying width.
 
 The above image was drawn using this library running the LineTest.kt test class and hopefully illustrates what this lib does in a simple way.
 
-To draw on a awt Graphics2d object, this could be used:
+To draw on an awt Graphics2d object, do:
 
 ```kotlin
 fun drawPolygon(hull: MutableList<LinePoint>, g2: Graphics2D) {
@@ -23,4 +23,4 @@ fun drawPolygon(hull: MutableList<LinePoint>, g2: Graphics2D) {
     g2.fill(path)
 }
 ```
-Latest release is found here: https://jitpack.io/#carlemil/VWLine/
+The Latest release can be found here: https://jitpack.io/#carlemil/VWCurve/

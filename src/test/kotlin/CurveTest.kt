@@ -1,5 +1,6 @@
 import org.junit.jupiter.api.Test
 import se.kjellstrand.variablewidthline.LinePoint
+import se.kjellstrand.variablewidthline.buildHullFromPolygon
 import java.awt.*
 import java.awt.geom.GeneralPath
 import java.awt.image.BufferedImage
@@ -71,9 +72,11 @@ class CurveTest {
             point.w = point.w * (maxWidth - minWidth) / 2.0 + minWidth / 2.0
         }
 
+        val vwLine = buildHullFromPolygon(line)
+
         val (bufferedImage, g2) = setupGraphics(640)
 
-        drawPolygon(line, g2)
+        drawPolygon(vwLine, g2)
 
         tearDownGraphics(g2)
 

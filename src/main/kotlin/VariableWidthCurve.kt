@@ -1,8 +1,5 @@
 package se.kjellstrand.variablewidthline
 
-import java.awt.Color
-import java.awt.Graphics2D
-import java.awt.geom.GeneralPath
 import kotlin.math.*
 
 fun buildHullFromPolygon(ppList: List<LinePoint>): MutableList<LinePoint> {
